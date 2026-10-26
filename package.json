@@ -1,0 +1,15 @@
+{
+  "name": "linelab-toolbox",
+  "version": "1.0.0",
+  "private": true,
+  "author": "kohaiy <i@kohai.top>",
+  "description": "行间 LineLab：24 个纯前端工具，覆盖文本、数据格式、开发辅助、生成器与图片处理。",
+  "scripts": {
+    "test": "node tests/tools.test.js && node tests/app-structure.test.js",
+    "serve": "npx --yes serve ."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

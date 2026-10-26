@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>行间 LineLab · 浏览器工具箱</title>
+  <meta name="description" content="行间是一组纯前端的日常工具：文本整理、JSON / CSV、开发辅助、随机生成、图片转换。无需登录，粘贴即用，数据不离开浏览器。">
+  <meta name="author" content="kohaiy">
+  <meta name="theme-color" content="#f3efe6" id="themeColor">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="行间 LineLab · 浏览器工具箱">
+  <meta property="og:description" content="24 个纯前端小工具：文本、数据、开发、生成器与图片。无需登录，数据不离开浏览器。">
+  <meta name="twitter:card" content="summary">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('linelab:theme');
+        var theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (error) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script src="./assets/tools.js" defer></script>
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主内容</a>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#/" aria-label="行间 LineLab 首页">
+        <span class="brand-mark" aria-hidden="true">&ldquo;&rdquo;</span>
+        <span class="brand-text">
+          <strong>行间</strong>
+          <span>LINELAB</span>
+        </span>
+      </a>
+
+      <div class="topbar-actions">
+        <button type="button" class="search-trigger" id="searchTrigger" aria-label="搜索工具" aria-haspopup="dialog" aria-controls="palette" aria-expanded="false">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m16 16 4.5 4.5"></path>
+          </svg>
+          <span class="search-trigger-label">搜索工具</span>
+          <span class="search-keys" aria-hidden="true"><kbd data-shortcut-mod>Ctrl</kbd><kbd>K</kbd></span>
+        </button>
+
+        <button type="button" class="icon-button theme-toggle" id="themeToggle" aria-label="切换到深色模式" title="切换主题">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="view home-view" id="homeView" aria-labelledby="homeTitle">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> LOCAL-FIRST UTILITY TOOLKIT</p>
+          <h1 id="homeTitle">把琐碎的处理，<br><em>交给浏览器。</em></h1>
+          <p class="hero-lede">行间是一组纯前端的日常工具：文本整理、JSON / CSV、开发辅助、随机生成、图片转换。无需登录，粘贴即用——数据不会离开浏览器。</p>
+
+          <div class="hero-search" role="search">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="m16 16 4.5 4.5"></path>
+            </svg>
+            <label class="sr-only" for="homeSearch">搜索工具</label>
+            <input id="homeSearch" type="search" placeholder="搜索工具，比如「引号」「JSON」「UUID」…" autocomplete="off" spellcheck="false">
+            <kbd class="hero-search-key" aria-hidden="true">/</kbd>
+          </div>
+
+          <ul class="hero-meta">
+            <li><strong id="toolCount">24</strong><span>个工具</span></li>
+            <li><strong>5</strong><span>个分类</span></li>
+            <li><strong>100%</strong><span>本地处理</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="demo-card">
+            <div class="demo-top">
+              <span class="traffic"><i></i><i></i><i></i></span>
+              <span class="demo-file">list.txt <span>&rarr;</span> quoted.sql</span>
+              <span class="demo-live">LIVE</span>
+            </div>
+            <div class="demo-body">
+              <div class="demo-col">
+                <span class="demo-label">INPUT</span>
+                <pre class="demo-code">123
+456
+O'Reilly</pre>
+              </div>
+              <div class="demo-arrow" aria-hidden="true">&rarr;</div>
+              <div class="demo-col demo-output">
+                <span class="demo-label">OUTPUT</span>
+                <pre class="demo-code"><span class="tok-quote">'</span>123<span class="tok-quote">'</span><span class="tok-comma">,</span>
+<span class="tok-quote">'</span>456<span class="tok-quote">'</span><span class="tok-comma">,</span>
+<span class="tok-quote">'</span>O<span class="tok-quote">''</span>Reilly<span class="tok-quote">'</span><span class="tok-comma">,</span></pre>
+              </div>
+            </div>
+            <div class="demo-foot">
+              <span>NO UPLOAD &middot; NO TRACKING</span>
+              <span class="demo-status"><i></i> 本地完成</span>
+            </div>
+          </div>
+          <span class="demo-orbit demo-orbit-a">'</span>
+          <span class="demo-orbit demo-orbit-b">JSON</span>
+          <span class="demo-orbit demo-orbit-c">IMG</span>
+        </div>
+      </div>
+
+      <section class="catalog" aria-labelledby="catalogTitle">
+        <div class="catalog-head">
+          <div class="section-heading">
+            <p class="section-kicker">TOOL CATALOG</p>
+            <h2 id="catalogTitle">挑一个顺手的工具</h2>
+          </div>
+          <div class="category-chips" id="categoryChips" role="group" aria-label="按分类筛选"></div>
+        </div>
+        <div class="tool-grid" id="toolGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <span class="empty-icon" aria-hidden="true">&#8981;</span>
+          <h3>没有找到工具</h3>
+          <p>换一个关键词，或者清除筛选后再看看。</p>
+          <button type="button" class="button button-quiet" id="resetFilters">清除筛选</button>
+        </div>
+      </section>
+
+      <section class="workflow" aria-labelledby="workflowTitle">
+        <div class="workflow-copy">
+          <p class="section-kicker">HOW IT WORKS</p>
+          <h2 id="workflowTitle">粘贴，调整，复制。<br>就这样。</h2>
+          <p>没有账号，没有后端，也没有上传按钮。文本、JSON、颜色、随机数和图片都在当前页面处理，关掉页面数据就消失。</p>
+        </div>
+        <ol class="workflow-steps">
+          <li>
+            <span class="step-index">01</span>
+            <div><h3>选工具</h3><p>文本、数据、开发、生成器、图片，一共 5 类。</p></div>
+          </li>
+          <li>
+            <span class="step-index">02</span>
+            <div><h3>粘内容</h3><p>输入原始内容，结果会随选项实时更新。</p></div>
+          </li>
+          <li>
+            <span class="step-index">03</span>
+            <div><h3>拿走结果</h3><p>一键复制、下载，或回填输出继续处理。</p></div>
+          </li>
+        </ol>
+      </section>
+    </section>
+
+    <section class="view tool-view" id="toolView" hidden aria-labelledby="toolTitle">
+      <aside class="tool-sidebar" aria-label="工具导航">
+        <a class="back-link" href="#/">
+          <span aria-hidden="true">&larr;</span>
+          所有工具
+        </a>
+        <div id="sidebarNav"></div>
+        <div class="sidebar-note">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+          </svg>
+          <div><strong>只在本机处理</strong><p>页面不会发送任何数据。</p></div>
+        </div>
+      </aside>
+
+      <article class="tool-main">
+        <nav class="breadcrumb" aria-label="面包屑">
+          <a href="#/">工具</a>
+          <span aria-hidden="true">/</span>
+          <span id="crumbCategory"></span>
+          <span aria-hidden="true">/</span>
+          <span id="crumbTool"></span>
+        </nav>
+
+        <header class="tool-head">
+          <div class="tool-heading">
+            <span class="tool-glyph tool-glyph-lg" id="toolGlyph" aria-hidden="true"></span>
+            <div>
+              <h1 id="toolTitle" tabindex="-1"></h1>
+              <p id="toolDesc"></p>
+            </div>
+          </div>
+          <div class="tool-tags" id="toolTags"></div>
+        </header>
+
+        <section class="workbench" id="workbench" aria-label="转换工作区">
+          <div class="pane" id="inputPane">
+            <header class="pane-head">
+              <div class="pane-title">
+                <span class="pane-index">01</span>
+                <h2>输入</h2>
+                <span class="live-pill"><i></i> 实时</span>
+              </div>
+              <div class="pane-actions">
+                <button type="button" class="pane-action" data-action="sample">示例</button>
+                <button type="button" class="pane-action" data-action="clear-input">清空</button>
+              </div>
+            </header>
+            <textarea id="inputText" class="code-area" wrap="off" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="在这里粘贴文本…" aria-label="输入文本"></textarea>
+            <footer class="pane-foot">
+              <span id="inputStats">等待输入</span>
+              <span class="privacy-note">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+                本地处理
+              </span>
+            </footer>
+          </div>
+
+          <div class="transfer" aria-hidden="true">
+            <span class="transfer-line"></span>
+            <span class="transfer-icon">&rarr;</span>
+            <span class="transfer-line"></span>
+          </div>
+
+          <div class="pane output-pane" id="outputPane">
+            <header class="pane-head">
+              <div class="pane-title">
+                <span class="pane-index">02</span>
+                <h2>输出</h2>
+              </div>
+              <div class="pane-actions">
+                <button type="button" class="pane-action" id="rerollBtn" data-action="reroll" hidden>重新生成</button>
+                <button type="button" class="pane-action pane-action-strong" id="copyBtn" data-action="copy" disabled>复制</button>
+                <button type="button" class="pane-action" id="downloadBtn" data-action="download" disabled>下载</button>
+                <button type="button" class="pane-action" id="swapBtn" data-action="swap" disabled>回填</button>
+              </div>
+            </header>
+            <textarea id="outputText" class="code-area" wrap="off" spellcheck="false" readonly placeholder="结果会出现在这里…" aria-label="输出结果"></textarea>
+            <div class="output-error" id="outputError" role="alert" hidden></div>
+            <footer class="pane-foot">
+              <span id="outputStats">等待输出</span>
+              <span id="outputDetail" class="output-detail"></span>
+            </footer>
+          </div>
+        </section>
+
+        <section class="custom-tool" id="customTool" hidden></section>
+
+        <section class="options-panel" id="optionsPanel" aria-labelledby="optionsTitle">
+          <header class="options-head">
+            <div class="section-heading section-heading-compact">
+              <p class="section-kicker">SETTINGS</p>
+              <h2 id="optionsTitle">处理选项</h2>
+            </div>
+            <div class="preset-bar" id="presetBar" hidden></div>
+            <button type="button" class="text-button" id="resetOptions">恢复默认</button>
+          </header>
+          <div class="options-grid" id="optionsGrid"></div>
+        </section>
+
+        <section class="tool-tips" aria-labelledby="tipsTitle">
+          <header class="section-heading section-heading-compact">
+            <p class="section-kicker">USE NOTES</p>
+            <h2 id="tipsTitle">使用提示</h2>
+          </header>
+          <ul class="tips-list" id="tipsList"></ul>
+        </section>
+
+        <footer class="tool-foot">
+          <span>行间 LineLab &middot; 无需登录 &middot; 数据不离开本机</span>
+          <button type="button" class="text-button" data-action="copy-link">复制当前工具链接</button>
+        </footer>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="#/">行间 <span>LINELAB</span></a>
+      <p>浏览器里的轻量工具箱 &middot; 纯静态 &middot; 可部署到 GitHub Pages</p>
+      <p>&copy; 2026 kohaiy &middot; Built for the browser</p>
+    </div>
+  </footer>
+
+  <div class="palette" id="palette" hidden>
+    <div class="palette-backdrop" data-palette-close></div>
+    <div class="palette-dialog" role="dialog" aria-modal="true" aria-labelledby="paletteLabel">
+      <div class="palette-search">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="m16 16 4.5 4.5"></path>
+        </svg>
+        <label class="sr-only" id="paletteLabel" for="paletteInput">搜索工具</label>
+        <input id="paletteInput" type="text" role="combobox" aria-autocomplete="list" aria-controls="paletteList" aria-expanded="false" placeholder="搜索工具、分类或关键词…" autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+        <button type="button" class="palette-close" id="paletteClose" aria-label="关闭搜索">&times;</button>
+      </div>
+      <div class="palette-list" id="paletteList" role="listbox" aria-label="工具搜索结果"></div>
+      <div class="palette-foot">
+        <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> 选择</span>
+        <span><kbd>&crarr;</kbd> 打开</span>
+        <span><kbd>Esc</kbd> 关闭</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <div class="noscript">行间需要 JavaScript 才能在浏览器本地完成转换，请启用后再试。</div>
+  </noscript>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "行间 LineLab",
+      "description": "纯前端的日常工具集合：文本、数据格式、开发辅助、生成器与图片工具。",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" }
+    }
+  </script>
+</body>
+</html>
