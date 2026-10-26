@@ -46,14 +46,22 @@
   --cat-image: #a34f5f;
   --cat-image-soft: #f3dfe3;
 
-  --code-bg: #161b18;
-  --code-bg-2: #111512;
-  --code-ink: #e9eee6;
-  --code-muted: #8d998f;
-  --code-border: rgba(255, 255, 255, 0.085);
-  --code-string: #b9d98a;
-  --code-punct: #f2a97d;
-  --code-accent: #7fd6c0;
+  --code-bg: #faf7ef;
+  --code-bg-2: #f4efe4;
+  --code-ink: #252a23;
+  --code-muted: #7b8177;
+  --code-border: rgba(23, 26, 23, 0.1);
+  --code-string: #2f7d5e;
+  --code-punct: #b4530a;
+  --code-accent: #0f766e;
+  --code-accent-soft: rgba(15, 118, 110, 0.07);
+  --code-accent-border: rgba(15, 118, 110, 0.24);
+  --code-accent-ink: #ffffff;
+  --code-hover: rgba(23, 26, 23, 0.055);
+  --code-scrollbar: rgba(23, 26, 23, 0.16);
+  --code-head: rgba(23, 26, 23, 0.025);
+  --code-foot: rgba(23, 26, 23, 0.018);
+  --code-placeholder: #969c92;
 
   --shadow-sm: 0 1px 2px rgba(48, 39, 22, 0.05);
   --shadow-md: 0 18px 42px -28px rgba(48, 39, 22, 0.36);
@@ -116,6 +124,14 @@
   --code-string: #c2e293;
   --code-punct: #ffb080;
   --code-accent: #7fd6c0;
+  --code-accent-soft: rgba(127, 214, 192, 0.06);
+  --code-accent-border: rgba(127, 214, 192, 0.22);
+  --code-accent-ink: #121713;
+  --code-hover: rgba(255, 255, 255, 0.055);
+  --code-scrollbar: rgba(255, 255, 255, 0.13);
+  --code-head: rgba(255, 255, 255, 0.018);
+  --code-foot: rgba(255, 255, 255, 0.012);
+  --code-placeholder: #5d675f;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.22);
   --shadow-md: 0 20px 48px -30px rgba(0, 0, 0, 0.8);
@@ -611,6 +627,13 @@ kbd {
 }
 
 .demo-card {
+  --code-bg: #161b18;
+  --code-ink: #e9eee6;
+  --code-muted: #8d998f;
+  --code-border: rgba(255, 255, 255, 0.085);
+  --code-string: #b9d98a;
+  --code-punct: #f2a97d;
+  --code-accent: #7fd6c0;
   position: relative;
   width: 100%;
   max-width: 520px;
@@ -1424,7 +1447,7 @@ kbd {
   min-height: 46px;
   padding: 0 13px;
   border-bottom: 1px solid var(--code-border);
-  background: rgba(255, 255, 255, 0.018);
+  background: var(--code-head);
 }
 
 .pane-title {
@@ -1456,7 +1479,7 @@ kbd {
   gap: 4px;
   margin-left: 2px;
   padding: 2px 6px;
-  border: 1px solid rgba(127, 214, 192, 0.22);
+  border: 1px solid var(--code-accent-border);
   border-radius: 999px;
   color: var(--code-accent);
   font-family: var(--font-mono);
@@ -1492,7 +1515,7 @@ kbd {
 
 .pane-action:hover:not(:disabled) {
   border-color: var(--code-border);
-  background: rgba(255, 255, 255, 0.055);
+  background: var(--code-hover);
   color: var(--code-ink);
 }
 
@@ -1501,14 +1524,14 @@ kbd {
 }
 
 .pane-action-strong {
-  border-color: rgba(127, 214, 192, 0.18);
-  background: rgba(127, 214, 192, 0.055);
+  border-color: var(--code-accent-border);
+  background: var(--code-accent-soft);
   color: var(--code-accent);
 }
 
 .pane-action.is-flashing {
   background: var(--code-accent);
-  color: #121713;
+  color: var(--code-accent-ink);
 }
 
 .code-area {
@@ -1531,7 +1554,7 @@ kbd {
 }
 
 .code-area::placeholder {
-  color: #5d675f;
+  color: var(--code-placeholder);
 }
 
 .code-area::-webkit-scrollbar {
@@ -1542,7 +1565,7 @@ kbd {
 .code-area::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.13);
+  background: var(--code-scrollbar);
   background-clip: padding-box;
 }
 
@@ -1551,11 +1574,11 @@ kbd {
 }
 
 .code-area:focus {
-  box-shadow: inset 0 0 0 1px rgba(127, 214, 192, 0.22);
+  box-shadow: inset 0 0 0 1px var(--code-accent-border);
 }
 
 .output-pane .code-area {
-  color: #dfe9df;
+  color: var(--code-ink);
 }
 
 .pane-foot {
@@ -1567,7 +1590,7 @@ kbd {
   min-height: 33px;
   padding: 0 13px;
   border-top: 1px solid var(--code-border);
-  background: rgba(255, 255, 255, 0.012);
+  background: var(--code-foot);
   color: var(--code-muted);
   font-family: var(--font-mono);
   font-size: 8.5px;
@@ -1629,11 +1652,11 @@ kbd {
   margin: 0 13px 11px;
   overflow: auto;
   padding: 11px 12px;
-  border: 1px solid rgba(255, 122, 92, 0.34);
-  border-left: 3px solid #ff7a5c;
+  border: 1px solid var(--accent-soft);
+  border-left: 3px solid var(--accent);
   border-radius: 8px;
-  background: rgba(255, 90, 60, 0.08);
-  color: #ffc4b7;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
   font-family: var(--font-mono);
   font-size: 10.5px;
   line-height: 1.65;
@@ -1824,7 +1847,7 @@ kbd {
 }
 
 .image-output:focus {
-  box-shadow: inset 0 0 0 1px rgba(127, 214, 192, 0.24);
+  box-shadow: inset 0 0 0 1px var(--code-accent-border);
 }
 
 .image-output-info {
